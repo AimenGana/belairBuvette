@@ -6,12 +6,18 @@
 
 plugins {
     id("buildlogic.java-application-conventions")
+    id("org.springframework.boot") version "3.3.5"
 }
 
 dependencies {
     implementation(project(":domain"))
     implementation(project(":infrastructure"))
+    implementation("org.springframework.boot:spring-boot-starter-web:3.3.5")
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.3.5")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.5")
 }
 
 application {
+    mainClass = "com.it.exalt.belair.BelairApplication"
 }
