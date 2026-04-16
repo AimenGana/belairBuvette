@@ -61,7 +61,7 @@ class InMemoryTransactionalOrderCreationAdapterIT {
     }
 
     @Test
-    void givenConcurrentOrdersOnLimitedStock_whenExecutedSimultaneously_thenOnlyOneConsumesRemainingStock() throws InterruptedException {
+    void givenConcurrentOrdersOnLimitedStock_whenExecutedConcurrently_thenOnlyOneConsumesRemainingStock() throws InterruptedException {
         // Given
         var adapter = new InMemoryTransactionalOrderCreationAdapter()
                 .withAvailableArticle("mojito", 1);
@@ -73,7 +73,7 @@ class InMemoryTransactionalOrderCreationAdapterIT {
 
         Runnable placeOrder = () -> {
             try {
-                assertTrue(start.await(1, TimeUnit.SECONDS));
+                assertTrue(start.await(1, TimeUnit.SECONDS), "Le démarrage concurrent des threads a expiré");
                 adapter.persistOrderWithStockUpdate(
                         FestivalierId.of("festivalier-42"),
                         List.of(new OrderLine("mojito", 1))
