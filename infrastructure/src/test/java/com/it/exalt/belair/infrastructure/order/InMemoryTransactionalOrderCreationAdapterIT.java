@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class InMemoryTransactionalOrderCreationAdapterIT {
 
     @Test
-    void givenAvailablePersistenceAdaptersAndSufficientStock_whenCreateOrderTransaction_thenPersistsOrderAndDecrementsStockAndCommits() {
+    void givenSufficientStock_whenCreateOrderTransaction_thenPersistsOrderAndDecrementsStock() {
         // Given
         var adapter = new InMemoryTransactionalOrderCreationAdapter()
                 .withAvailableArticle("mojito", 10)

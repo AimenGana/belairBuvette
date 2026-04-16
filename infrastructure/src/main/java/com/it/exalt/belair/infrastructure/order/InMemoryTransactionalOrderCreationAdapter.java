@@ -47,8 +47,9 @@ public class InMemoryTransactionalOrderCreationAdapter {
 
             var order = Order.newOrder(festivalierId, OrderStatus.EN_ATTENTE, lines);
 
-            stockByArticle.clear();
-            stockByArticle.putAll(transactionalStock);
+            for (var line : lines) {
+                stockByArticle.put(line.article(), transactionalStock.get(line.article()));
+            }
             ordersById.put(order.id(), order);
 
             return order;
